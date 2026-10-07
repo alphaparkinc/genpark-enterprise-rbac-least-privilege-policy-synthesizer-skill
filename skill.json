@@ -1,0 +1,43 @@
+{
+  "name": "genpark-enterprise-rbac-least-privilege-policy-synthesizer-skill",
+  "version": "1.0.0",
+  "description": "Enterprise Agentic RBAC/ABAC Least-Privilege Policy Synthesizer & Blast-Radius Auditor. Analyzes historical agent tool call audit logs, detects over-permissioned wildcards (*), synthesizes strict least-privilege JSON security boundary policies, and quantifies attack surface reduction.",
+  "tools": [
+    {
+      "name": "synthesize_rbac_policy",
+      "description": "Analyze agent audit logs, identify over-permissioned wildcards, generate granular least-privilege RBAC/ABAC policies, and measure blast-radius reduction.",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "action": {
+            "type": "string",
+            "enum": [
+              "synthesize_least_privilege_policy",
+              "audit_policy_blast_radius",
+              "validate_action_against_policy"
+            ],
+            "description": "Security policy action."
+          },
+          "agent_id": {
+            "type": "string",
+            "description": "Agent identifier."
+          },
+          "execution_logs": {
+            "type": "array",
+            "items": {
+              "type": "object"
+            },
+            "description": "List of historical tool executions [action, resource, status]."
+          },
+          "current_policy": {
+            "type": "object",
+            "description": "Existing broad policy to evaluate."
+          }
+        },
+        "required": [
+          "action"
+        ]
+      }
+    }
+  ]
+}
